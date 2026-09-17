@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rizoon — Daily Pool Prize</title>
+<meta name="description" content="Join the Rizoon pool, select your numbers, register through Telegram, and follow the daily draw. 18+ only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#080713;--bg2:#0d0c1d;--panel:#14132a;--panel2:#19182f;
+  --gold:#ffd52f;--gold2:#ff9f1c;--blue:#1593ff;--cyan:#36d6ff;
+  --purple:#8b55ff;--pink:#ff3ea5;--white:#fbfbff;--muted:#a7a5bb;
+  --line:rgba(255,255,255,.11);--display:'Outfit',sans-serif;--body:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--body);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+.wrap{width:min(1240px,calc(100% - 48px));margin:auto}
+h1,h2,h3{font-family:var(--display);line-height:1.02;letter-spacing:-.04em}
+nav{height:72px;position:sticky;top:0;z-index:50;background:rgba(7,7,17,.84);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;line-height:0}.site-logo{display:block;width:150px;height:auto;max-height:48px;object-fit:contain}
+.logo-mark{width:32px;height:26px;border:3px solid var(--cyan);border-radius:10px;position:relative;box-shadow:0 0 18px rgba(54,214,255,.45)}
+.logo-mark:before,.logo-mark:after{content:"";position:absolute;width:5px;height:5px;border-radius:50%;background:var(--cyan);top:8px}
+.logo-mark:before{left:6px}.logo-mark:after{right:6px}
+.logo span{color:#fff}.logo span b{color:var(--gold)}
+.nav-links{display:flex;gap:30px;color:#b6b4c9;font-weight:700;font-size:14px}
+.nav-links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 21px;border-radius:11px;font:800 14px var(--display);border:1px solid transparent;cursor:pointer;transition:.2s}
+.btn-blue{background:linear-gradient(135deg,#1c9aff,#0672e8);box-shadow:0 9px 28px rgba(21,147,255,.27)}
+.btn-blue:hover{transform:translateY(-2px);box-shadow:0 14px 35px rgba(21,147,255,.38)}
+.btn-gold{background:linear-gradient(135deg,#ffe46a,#ffc51e);color:#201500;box-shadow:0 10px 32px rgba(255,197,30,.24)}
+.btn-outline{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.025)}
+.telegram-icon{font-weight:900;font-size:18px}
+
+.hero{position:relative;min-height:670px;overflow:hidden;padding:55px 0 30px;
+background:
+radial-gradient(45% 70% at 78% 44%,rgba(255,177,20,.17),transparent 65%),
+radial-gradient(38% 60% at 53% 30%,rgba(34,105,255,.18),transparent 70%),
+linear-gradient(135deg,#080713 0%,#0b1020 58%,#110d20 100%)}
+.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(100,160,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(100,160,255,.045) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to right,#000,transparent 95%)}
+.hero:after{content:"";position:absolute;right:-10%;top:-25%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,190,35,.11),transparent 67%);filter:blur(25px)}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:43% 57%;align-items:center;min-height:580px}
+.hero-copy{padding-left:25px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 13px;border:1px solid rgba(255,213,47,.42);background:rgba(255,213,47,.07);border-radius:999px;color:var(--gold);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:#51e47d;box-shadow:0 0 12px #51e47d}
+.hero h1{font-size:clamp(54px,6vw,86px);margin-top:20px;text-transform:uppercase}
+.hero h1 span{display:block;color:var(--gold);font-style:italic;text-shadow:0 0 24px rgba(255,213,47,.22)}
+.hero-copy>p{margin-top:22px;max-width:520px;color:#c6c4d5;font-size:17px;line-height:1.55}
+.hero-copy>p b{color:var(--gold)}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero-note{font-size:12px!important;color:#79768e!important;margin-top:12px!important}
+.trust-row{display:flex;gap:24px;flex-wrap:wrap;margin-top:25px;color:#deddea;font-size:12px;font-weight:700}
+.trust-row span{display:flex;align-items:center;gap:7px}.trust-row strong{color:var(--gold);font-size:16px}
+
+.lottery-scene{position:relative;height:570px}
+.glow-orb{position:absolute;width:470px;height:470px;right:7%;top:4%;border-radius:50%;background:radial-gradient(circle,rgba(29,151,255,.25),rgba(255,181,20,.11) 42%,transparent 68%);filter:blur(8px)}
+.machine{position:absolute;width:440px;height:430px;right:10%;top:48px}
+.machine-glass{position:absolute;width:310px;height:310px;left:63px;top:18px;border-radius:50%;background:radial-gradient(circle at 35% 25%,rgba(255,255,255,.22),rgba(30,44,75,.72) 42%,rgba(4,8,18,.95) 70%);border:7px solid rgba(255,197,30,.8);box-shadow:0 0 35px rgba(255,183,25,.25),inset 0 0 35px rgba(42,161,255,.18)}
+.machine-glass:after{content:"";position:absolute;inset:15px;border:1px solid rgba(255,255,255,.12);border-radius:50%}
+.base{position:absolute;left:18px;right:18px;bottom:20px;height:105px;border-radius:26px;background:linear-gradient(160deg,#28203c,#0b0b18);border:2px solid rgba(255,196,27,.72);box-shadow:0 20px 40px rgba(0,0,0,.55),0 0 30px rgba(255,196,27,.18);display:flex;align-items:end;justify-content:center;padding-bottom:18px}
+.base:before{content:"";position:absolute;top:-8px;left:20px;right:20px;height:16px;border-radius:50%;background:#f1a51e;filter:blur(5px);opacity:.6}
+.base span{font:800 19px var(--display);color:var(--gold);letter-spacing:.08em}
+.crown{position:absolute;top:-2px;right:38px;font-size:57px;color:var(--gold);filter:drop-shadow(0 0 14px rgba(255,213,47,.7));z-index:4;transform:rotate(5deg)}
+.ball{position:absolute;width:65px;height:65px;border-radius:50%;display:grid;place-items:center;font:900 22px var(--display);z-index:3;color:#15121b;background:radial-gradient(circle at 30% 25%,#fff,#ffd84e 32%,#f29b13 72%);box-shadow:0 10px 22px rgba(0,0,0,.45),0 0 20px rgba(255,183,25,.25)}
+.ball.blue{background:radial-gradient(circle at 30% 25%,#fff,#6bd5ff 23%,#1478ef 68%);color:#fff}
+.ball.purple{background:radial-gradient(circle at 30% 25%,#fff,#be7dff 23%,#7040d7 70%);color:#fff}
+.b1{left:2px;top:115px}.b2{right:3px;top:110px}.b3{left:16px;bottom:135px}.b4{right:34px;bottom:135px}.b5{left:170px;bottom:72px}
+.b6{left:185px;top:80px}
+.ball-inner{position:absolute;width:55px;height:55px;border-radius:50%;background:linear-gradient(145deg,#fafcff,#c9d5e8);display:grid;place-items:center;font-size:18px;color:#171421;box-shadow:inset -5px -6px 12px rgba(0,0,0,.2)}
+.machine-label{position:absolute;z-index:5;left:98px;top:138px;width:240px;text-align:center;padding:15px 10px;border-radius:14px;background:rgba(7,9,20,.9);border:1px solid rgba(255,213,47,.45);box-shadow:0 0 28px rgba(255,213,47,.18)}
+.machine-label small{font-size:11px;font-weight:800;color:#eee}.machine-label strong{display:block;color:var(--gold);font:900 43px var(--display);text-shadow:0 0 16px rgba(255,213,47,.55)}.machine-label b{font-size:11px;letter-spacing:.09em}
+.machine-label .count{display:flex;gap:5px;justify-content:center;margin-top:9px}.count em{font-style:normal;background:#17182b;border:1px solid var(--line);border-radius:7px;padding:6px 8px;font:800 14px var(--display)}.count i{display:block;font:700 7px var(--body);color:#8d8aa0}
+.luck-card{position:absolute;right:-15px;top:235px;z-index:6;transform:rotate(5deg);width:145px;padding:17px 13px;background:linear-gradient(145deg,#ffe59a,#e9a928);color:#271a05;border:3px solid #ffc82e;box-shadow:0 16px 30px rgba(0,0,0,.35);text-align:center}
+.luck-card strong{font:900 19px var(--display);text-transform:uppercase;line-height:1.05}.luck-card small{display:block;margin-top:9px;font-weight:800;font-size:10px}
+
+.stat-strip{position:relative;z-index:5;margin-top:-3px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(13,12,29,.94)}
+.stat-inner{display:grid;grid-template-columns:1fr 1.5fr 1fr;align-items:center;min-height:105px}
+.stat-title{font-weight:800;font-size:14px}.stat-title span{color:var(--gold)}
+.countdown{display:flex;gap:8px;justify-content:center}.timebox{min-width:76px;padding:10px 6px;border-radius:10px;text-align:center;background:#13162b;border:1px solid rgba(70,117,220,.27);box-shadow:inset 0 0 18px rgba(21,147,255,.08)}.timebox b{display:block;font:900 22px var(--display)}.timebox small{color:#8f8ca3;font-size:9px;text-transform:uppercase}
+.community{justify-self:end;padding:12px 16px;border:1px solid var(--line);border-radius:13px;background:#121329;display:flex;align-items:center;gap:10px}.avatars{display:flex}.avatars i{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));border:2px solid #121329;margin-left:-7px}.avatars i:first-child{margin-left:0}.community b{display:block;font-size:13px}.community small{color:#55dd82;font-size:10px;font-weight:700}
+
+section{padding:92px 0}.section-dark{background:#0a0a17}.section-title{font-size:clamp(35px,4vw,54px)}.section-sub{margin-top:12px;color:var(--muted);max-width:620px}
+
+.how{background:linear-gradient(120deg,#090917,#0b1022)}
+.how-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:50px;align-items:center}
+.steps{margin-top:30px;display:grid;gap:13px}.step{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}.step-num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(21,147,255,.14);border:1px solid rgba(21,147,255,.4);color:var(--cyan);font-weight:900}.step b{font:800 15px var(--display)}.step p{color:var(--muted);font-size:12px;margin-top:2px}
+.game-visual{height:390px;border-radius:26px;overflow:hidden;position:relative;background:
+radial-gradient(circle at 70% 30%,rgba(28,154,255,.3),transparent 27%),
+linear-gradient(135deg,#121b36,#090b18);border:1px solid rgba(54,214,255,.25);box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.game-visual:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.05) 36%,transparent 37%);background-size:80px 80px}
+.avatar{position:absolute;right:11%;bottom:-15px;width:230px;height:300px;border-radius:45% 45% 12% 12%;background:linear-gradient(145deg,#172e57,#0a0e19);box-shadow:-25px 0 60px rgba(31,136,255,.23)}.avatar:before{content:"";position:absolute;width:112px;height:112px;border-radius:50%;background:#111c31;left:58px;top:-45px;border:5px solid #202d49;box-shadow:0 0 28px rgba(54,214,255,.3)}.avatar:after{content:"";position:absolute;width:130px;height:35px;border-radius:50%;border:7px solid #2ca8ff;left:49px;top:7px;transform:rotate(-5deg)}
+.neon-copy{position:absolute;left:38px;top:50px;font:900 42px var(--display);text-transform:uppercase;transform:rotate(-5deg);text-shadow:0 0 22px rgba(54,214,255,.4)}.neon-copy span{display:block;color:var(--cyan);font-style:italic}.neon-small{position:absolute;left:42px;bottom:40px;color:#f5f0ff;font:800 12px var(--display);letter-spacing:.1em}
+
+.pool{background:#0d0c1d}.pool-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}.pool-head .section-sub{max-width:500px}
+.prize-grid{display:grid;grid-template-columns:1.55fr .8fr .8fr;gap:16px}.prize-card{position:relative;min-height:300px;overflow:hidden;padding:25px;border-radius:20px;background:linear-gradient(145deg,#17233f,#0c1122);border:1px solid rgba(74,128,235,.3)}.prize-card.main{background:radial-gradient(circle at 72% 65%,rgba(255,166,17,.25),transparent 35%),linear-gradient(145deg,#19294b,#0b1020);border-color:rgba(255,213,47,.5);box-shadow:0 0 35px rgba(255,194,27,.1)}.prize-tag{display:inline-block;padding:5px 10px;border-radius:999px;background:rgba(21,147,255,.1);border:1px solid rgba(21,147,255,.3);color:var(--cyan);font-size:9px;font-weight:900;text-transform:uppercase}.prize-card h3{margin-top:24px;font-size:clamp(39px,5vw,69px);color:var(--gold);text-shadow:0 0 20px rgba(255,213,47,.35)}.prize-card.main h3{font-size:clamp(52px,6vw,82px)}.prize-card p{margin-top:4px;color:#c8c7d7;font-size:13px;font-weight:700}.prize-art{position:absolute;right:25px;bottom:25px;font-size:75px;filter:drop-shadow(0 0 20px rgba(255,200,25,.35))}.small-card{min-height:145px}.small-card h3{font-size:42px}.small-card .prize-art{font-size:52px;right:18px;bottom:16px}.small-card+.small-card{margin-top:10px}
+.info-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:16px}.info{padding:20px;border:1px solid var(--line);border-radius:16px;background:#121329;display:flex;gap:14px}.info-icon{width:48px;height:48px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(21,147,255,.1);color:var(--cyan);font-size:21px}.info small{color:#858299;font-size:10px}.info b{display:block;font:800 16px var(--display);margin-top:2px}.info p{font-size:10px;color:var(--muted);margin-top:3px}
+
+.picker{background:radial-gradient(40% 60% at 80% 20%,rgba(120,73,255,.14),transparent 70%),#080713}.picker-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}.tabs{display:flex;padding:4px;background:#121329;border:1px solid var(--line);border-radius:11px}.tabs button{border:0;background:transparent;color:#8e8ba1;padding:10px 18px;border-radius:8px;font-weight:800;cursor:pointer}.tabs button.active{background:var(--blue);color:#fff;box-shadow:0 5px 20px rgba(21,147,255,.3)}
+.pick-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:17px}.number-box,.slip{background:#11132a;border:1px solid var(--line);border-radius:20px;padding:23px}.pick-label{display:flex;justify-content:space-between;margin-bottom:15px;font-weight:800}.pick-label small{color:var(--muted)}.number-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.number-grid button{aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.1);background:#0b0d1c;color:#dfe4f2;font-weight:800;cursor:pointer}.number-grid button.selected{background:radial-gradient(circle at 30% 25%,#fff,#55c7ff 16%,#1386ff 62%,#07449e);border:0;box-shadow:0 0 20px rgba(21,147,255,.3)}.pick-actions{display:flex;gap:10px;margin-top:17px}.slip{background:linear-gradient(145deg,#18213c,#0f1225);position:sticky;top:88px}.slip h3{font-size:18px}.slip-balls{display:flex;gap:9px;margin:18px 0}.slip-ball{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#0a0d1a;border:1px dashed #58627b;color:#778198;font-weight:900}.slip-ball.filled{border:0;background:radial-gradient(circle at 30% 25%,#fff,#ffd84e 28%,#e89b13 75%);color:#342000}.slip dl{display:grid;grid-template-columns:1fr auto;gap:10px;padding-top:15px;border-top:1px solid var(--line);font-size:13px}.slip dt{color:var(--muted)}.slip dd{font-weight:800}.slip dd.gold{color:var(--gold);font-size:17px}.slip .btn{width:100%;margin-top:18px}.slip-note{text-align:center;color:#77748a;font-size:10px;margin-top:10px}
+
+.winners{background:#0d0c1d}.winner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:28px}.winner{padding:17px;border-radius:16px;background:#13152a;border:1px solid var(--line);display:flex;gap:12px;align-items:center}.winner-avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#334bd8,#8d4df1);font-weight:900}.winner small{display:block;color:#77748a;font-size:10px}.winner b{font:800 13px var(--display)}.winner b span{color:var(--gold)}
+
+.features{text-align:center;background:#080713}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:25px;margin-top:40px}.feature-icon{width:72px;height:72px;margin:auto auto 14px;border-radius:50%;display:grid;place-items:center;font-size:29px;background:#15142a;border:1px solid var(--line);box-shadow:0 0 30px rgba(139,85,255,.13)}.feature b{font:800 16px var(--display)}.feature p{color:var(--muted);font-size:12px;margin-top:5px}
+
+.final{position:relative;overflow:hidden;text-align:center;padding:115px 0;background:
+radial-gradient(45% 70% at 50% 100%,rgba(21,147,255,.35),transparent 70%),
+radial-gradient(30% 50% at 15% 20%,rgba(139,85,255,.16),transparent 70%),#080713}
+.final:before{content:"";position:absolute;width:600px;height:220px;left:50%;bottom:-120px;transform:translateX(-50%);border-radius:50%;background:rgba(21,147,255,.25);filter:blur(50px)}
+.final h2{position:relative;font-size:clamp(38px,5vw,62px);max-width:720px;margin:auto}.final h2 span{color:var(--gold)}.final p{position:relative;color:#b9b7c9;max-width:590px;margin:16px auto}.final .btn{position:relative;margin-top:17px;padding:17px 31px;font-size:15px}.legal-note{font-size:10px!important;color:#69667b!important;margin-top:20px!important}
+
+footer{border-top:1px solid var(--line);padding:35px 0 25px;background:#06060e;color:#79768b;font-size:11px}.footer-top{display:flex;justify-content:space-between;gap:20px}.footer-links{display:flex;gap:22px}.footer-links a:hover{color:#fff}.footer-bottom{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px;margin-top:20px}
+
+.fab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;padding:16px 11px;writing-mode:vertical-rl;background:var(--blue);border-radius:12px 0 0 12px;font-weight:900;box-shadow:0 0 25px rgba(21,147,255,.35)}
+.modal{position:fixed;inset:0;z-index:100;background:rgba(2,3,8,.72);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.modal-card{width:min(440px,100%);padding:26px;border-radius:22px;background:#15182d;border:1px solid rgba(54,214,255,.25);box-shadow:0 30px 80px rgba(0,0,0,.6)}.modal-card h3{font-size:27px}.modal-card p{color:var(--muted);font-size:13px;margin-top:8px}.modal-actions{display:grid;gap:10px;margin-top:20px}.close{float:right;border:0;background:none;color:#8d8a9e;font-size:24px;cursor:pointer}
+
+
+.play-popup{
+  position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;
+  padding:18px;background:rgba(3,4,12,.78);backdrop-filter:blur(10px);
+  opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease;
+}
+.play-popup.show{opacity:1;visibility:visible;pointer-events:auto}
+.play-popup-card{
+  position:relative;width:min(430px,100%);padding:25px 24px 22px;text-align:center;
+  border-radius:24px;background:
+    radial-gradient(circle at 50% 0,rgba(255,213,47,.14),transparent 32%),
+    linear-gradient(145deg,#172342,#0d1022);
+  border:1px solid rgba(255,213,47,.38);
+  box-shadow:0 30px 90px rgba(0,0,0,.7),0 0 45px rgba(21,147,255,.17);
+  transform:translateY(14px) scale(.97);transition:transform .25s ease;
+}
+.play-popup.show .play-popup-card{transform:none}
+.popup-close{
+  position:absolute;right:13px;top:10px;width:32px;height:32px;border:1px solid var(--line);
+  border-radius:50%;background:rgba(255,255,255,.04);color:#aaa7ba;font-size:22px;cursor:pointer;
+}
+.popup-logo-wrap{display:flex;justify-content:center;margin-bottom:11px}
+.popup-logo-wrap img{width:135px;height:auto;max-height:46px;object-fit:contain}
+.popup-badge{
+  display:inline-flex;padding:6px 11px;border-radius:999px;background:rgba(255,213,47,.08);
+  border:1px solid rgba(255,213,47,.35);color:var(--gold);font-size:10px;font-weight:900;letter-spacing:.08em
+}
+.play-popup-card h3{font-size:30px;margin-top:13px}
+.play-popup-card>p{margin:8px auto 16px;color:#aaa9bd;font-size:13px;max-width:350px}
+.popup-prize{
+  padding:15px 12px;border-radius:16px;background:rgba(5,7,18,.55);
+  border:1px solid rgba(255,213,47,.42);box-shadow:0 0 25px rgba(255,213,47,.08)
+}
+.popup-prize span{display:block;color:#d7d6e0;font-size:9px;font-weight:900;letter-spacing:.12em}
+.popup-prize strong{display:block;margin:3px 0;color:var(--gold);font:900 42px var(--display);text-shadow:0 0 18px rgba(255,213,47,.4)}
+.popup-prize small{color:#88859a;font-size:10px}
+.popup-points{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:14px 0;color:#d6d5df;font-size:10px;font-weight:800}
+.popup-points span:first-child{color:#65e28a}
+.popup-telegram{width:100%;padding:15px 20px;font-size:15px}
+.popup-later{margin-top:12px;border:0;background:none;color:#777489;font-size:11px;font-weight:700;cursor:pointer}
+.popup-later:hover{color:#fff}
+
+@media(max-width:1050px){
+  .hero-grid{grid-template-columns:1fr}.hero-copy{padding:20px 0;text-align:center}.hero-copy>p{margin-left:auto;margin-right:auto}.hero-actions,.trust-row{justify-content:center}.lottery-scene{height:520px}.machine{right:50%;transform:translateX(50%) scale(.9)}.stat-inner{grid-template-columns:1fr 1.6fr}.community{display:none}.prize-grid{grid-template-columns:1fr 1fr}.prize-card.main{grid-row:span 2}.winner-grid{grid-template-columns:1fr 1fr}.feature-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .site-logo{width:125px}.play-popup-card{padding:22px 18px 18px}.play-popup-card h3{font-size:26px}.popup-prize strong{font-size:35px}
+  .wrap{width:min(100% - 30px,1240px)}nav{height:64px}.nav-links{display:none}.nav-inner>.btn{padding:10px 13px;font-size:11px}.hero{padding-top:30px}.hero h1{font-size:47px}.hero-copy>p{font-size:14px}.lottery-scene{height:390px}.machine{transform:translateX(50%) scale(.67);transform-origin:top center;top:0}.glow-orb{width:330px;height:330px;right:0}.stat-inner{display:block;padding:18px 0}.countdown{margin-top:12px}.timebox{min-width:0;flex:1}.timebox b{font-size:18px}.pool-head,.picker-head{display:block}.tabs{margin-top:18px}.how-grid,.pick-layout{grid-template-columns:1fr}.game-visual{height:300px}.prize-grid{grid-template-columns:1fr}.prize-card.main{grid-row:auto;min-height:300px}.small-card+.small-card{margin-top:0}.info-tiles{grid-template-columns:1fr}.number-grid{grid-template-columns:repeat(5,1fr)}.slip{position:relative;top:0}.winner-grid,.feature-grid{grid-template-columns:1fr}.footer-top,.footer-bottom{display:block}.footer-links{margin-top:15px;flex-wrap:wrap}.final{padding:80px 0}
+}
+</style>
+</head>
+
+<body>
+<nav>
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top"><img class="site-logo" src="./images/logo.png" alt="Rizoon" /></a>
+    <div class="nav-links">
+      <a href="#top">Home</a><a href="#pool">Prize Pool</a><a href="#pick">Pick Rizoon</a><a href="#how">How It Works</a><a href="#winners">Winners</a>
+    </div>
+    <a class="btn btn-blue tg-link" href="#"><span class="telegram-icon">➤</span> Join on Telegram</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><i></i> Live tonight · bigger pool</span>
+      <h1>Play.<br>Predict.<span>Win Big!</span></h1>
+      <p>Join today's pool and get a chance to win from the <b id="heroTotal">$110,000</b> prize pool. Pick your lucky Rizoon, register through Telegram, and follow the official draw updates.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold tg-link" href="#">➤ Play Today's Rizoon Pool →</a>
+        <a class="btn btn-outline" href="#how">How It Works</a>
+      </div>
+      <p class="hero-note">18+ only · Participation subject to applicable rules, eligibility and local laws.</p>
+      <div class="trust-row">
+        <span><strong>◈</strong> Transparent results</span>
+        <span><strong>♛</strong> Daily pool</span>
+        <span><strong>✓</strong> Responsible play</span>
+      </div>
+    </div>
+
+    <div class="lottery-scene" aria-label="Today's lottery pool prize">
+      <div class="glow-orb"></div>
+      <div class="machine">
+        <div class="crown">♛</div>
+        <div class="machine-glass"></div>
+        <div class="ball blue b1">7</div>
+        <div class="ball purple b2">3</div>
+        <div class="ball b3">9</div>
+        <div class="ball blue b4">5</div>
+        <div class="ball b5">2</div>
+        <div class="ball purple b6">8</div>
+        <div class="machine-label">
+          <small>TODAY'S PRIZE POOL</small>
+          <strong id="bigTotal">$0</strong>
+          <b>BIG POOL · BIGGER DREAMS</b>
+          <div class="count"><em>05<i>Days</i></em><em>43<i>Hours</i></em><em>16<i>Min</i></em><em>28<i>Sec</i></em></div>
+        </div>
+        <div class="luck-card"><strong>Your luck<br>can change<br>your day</strong><small>REGISTER YOUR Rizoon</small></div>
+        <div class="base"><span>Rizoon · DAILY POOL</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="stat-strip">
+  <div class="wrap stat-inner">
+    <div class="stat-title">Next draw starts in <span id="nextName">Tonight</span></div>
+    <div class="countdown" id="clock">
+      <div class="timebox"><b>05</b><small>Days</small></div><div class="timebox"><b>43</b><small>Hours</small></div><div class="timebox"><b>16</b><small>Minutes</small></div><div class="timebox"><b>28</b><small>Seconds</small></div>
+    </div>
+    <div class="community"><div class="avatars"><i></i><i></i><i></i><i></i></div><div><b>12,428+</b><small>players joined</small></div></div>
+  </div>
+</div>
+
+<section class="how" id="how">
+  <div class="wrap how-grid">
+    <div>
+      <h2 class="section-title">One pool.<br>Three simple steps.<br><span style="color:var(--cyan)">One big draw.</span></h2>
+      <p class="section-sub">The experience is designed to make pool registration simple: choose your Rizoon, register on Telegram, then follow the published draw result.</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">01</div><div><b>Choose your Rizoon</b><p>Select the available numbers for today's pool.</p></div></div>
+        <div class="step"><div class="step-num">02</div><div><b>Join Telegram &amp; Register</b><p>Continue to the official Telegram channel or registration bot.</p></div></div>
+        <div class="step"><div class="step-num">03</div><div><b>Follow the draw</b><p>Check the officially published winning result after the draw.</p></div></div>
+      </div>
+      <a class="btn btn-blue tg-link" style="margin-top:24px" href="#">➤ Join Telegram &amp; Register</a>
+    </div>
+    <div class="game-visual">
+      <div class="neon-copy">Small bets<br><span>Big wins</span></div>
+      <div class="neon-small">PICK · REGISTER · FOLLOW THE DRAW</div>
+      <div class="avatar"></div>
+    </div>
+  </div>
+</section>
+
+<section class="pool" id="pool">
+  <div class="wrap">
+    <div class="pool-head">
+      <div><h2 class="section-title">🏆 Today's Prize Pool</h2><p class="section-sub">See the pool breakdown before you register your Rizoon.</p></div>
+      <a class="btn btn-outline" href="#pick">Choose Rizoon →</a>
+    </div>
+
+    <div class="prize-grid">
+      <article class="prize-card main">
+        <span class="prize-tag">GRAND POOL</span>
+        <h3 id="p4Prize">$110,000</h3>
+        <p>Grand prize · subject to official draw rules</p>
+        <div class="prize-art">👑</div>
+      </article>
+      <article class="prize-card small-card">
+        <span class="prize-tag">SECOND POOL</span>
+        <h3 id="q3Prize">$10,000</h3>
+        <p>Winning Rizoon match</p>
+        <div class="prize-art">🏆</div>
+      </article>
+      <article class="prize-card small-card">
+        <span class="prize-tag">THIRD POOL</span>
+        <h3 id="q3Any">$1,000</h3>
+        <p>Additional prize tier</p>
+        <div class="prize-art">🥇</div>
+      </article>
+    </div>
+
+    <div class="info-tiles">
+      <div class="info"><div class="info-icon">🎟</div><div><small>ENTRY</small><b>$2.50 · $3.50</b><p>Pool entry depends on selected draw.</p></div></div>
+      <div class="info"><div class="info-icon">◷</div><div><small>DRAW TIME</small><b>8:00 PM · 9:00 PM</b><p>Check the official Telegram announcement.</p></div></div>
+      <div class="info"><div class="info-icon">✓</div><div><small>RESULT</small><b>Published &amp; Verifiable</b><p>Results are announced after each draw.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="picker" id="pick">
+  <div class="wrap">
+    <div class="picker-head">
+      <div><h2 class="section-title">Pick your Rizoon</h2><p class="section-sub">Select your numbers and continue to Telegram for registration.</p></div>
+      <div class="tabs"><button class="active" data-game="q3">Quick 3</button><button data-game="p4">Pick 4</button></div>
+    </div>
+
+    <div class="pick-layout">
+      <div class="number-box">
+        <div class="pick-label"><span id="pickLabel">Pick 3 numbers</span><small id="pickCount">0 / 3</small></div>
+        <div class="number-grid" id="numberGrid"></div>
+        <div class="pick-actions"><button class="btn btn-outline" id="randomBtn">✦ Easy Pick</button><button class="btn btn-outline" id="clearBtn">Clear</button></div>
+      </div>
+
+      <aside class="slip">
+        <h3 id="slipTitle">Quick 3 · Tonight</h3>
+        <div class="slip-balls" id="slipBalls"></div>
+        <dl>
+          <dt>Entry</dt><dd id="slipEntry">$2.50</dd>
+          <dt>Top prize</dt><dd class="gold" id="slipPrize">$10,000</dd>
+          <dt>Draw</dt><dd id="slipDraw">8:00 PM</dd>
+        </dl>
+        <a class="btn btn-blue tg-link" id="playBtn" href="#">➤ Register this Rizoon on Telegram</a>
+        <div class="slip-note">Registration continues through the official Telegram flow.</div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="winners" id="winners">
+  <div class="wrap">
+    <h2 class="section-title">Recent Winners</h2>
+    <p class="section-sub">Use real, consented winner data here before publishing.</p>
+    <div class="winner-grid" id="winnerGrid">
+      <div class="winner"><div class="winner-avatar">AS</div><div><small>Aarav S.</small><b>Won <span>$10,000</span></b><small>12 Sep 2026</small></div></div>
+      <div class="winner"><div class="winner-avatar">NK</div><div><small>Neha K.</small><b>Won <span>$1,000</span></b><small>11 Sep 2026</small></div></div>
+      <div class="winner"><div class="winner-avatar">RM</div><div><small>Rohit M.</small><b>Won <span>$100,000</span></b><small>10 Sep 2026</small></div></div>
+      <div class="winner"><div class="winner-avatar">PT</div><div><small>Pooja T.</small><b>Won <span>$1,000</span></b><small>09 Sep 2026</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="wrap">
+    <h2 class="section-title">More than a draw</h2>
+    <div class="feature-grid">
+      <div class="feature"><div class="feature-icon">🎮</div><b>Simple to play</b><p>Choose a Rizoon and follow the registration flow.</p></div>
+      <div class="feature"><div class="feature-icon">🛡</div><b>Transparent results</b><p>Publish draw results clearly after each draw.</p></div>
+      <div class="feature"><div class="feature-icon">👥</div><b>Growing community</b><p>Keep your participants connected through Telegram.</p></div>
+      <div class="feature"><div class="feature-icon">🎁</div><b>Prize pool</b><p>Show every available prize tier before entry.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2><span>$110,000</span> pool prize is open tonight.</h2>
+    <p>Choose your Rizoon, register through Telegram, and follow the official draw updates.</p>
+    <a class="btn btn-blue tg-link" href="#">➤ Join Telegram &amp; Play Now</a>
+    <p class="legal-note">18+ only. Participation is subject to applicable law, official rules, eligibility requirements and published odds.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div><a class="logo" href="#top"><img class="site-logo" src="./images/logo.png" alt="Rizoon" /></a><p style="margin-top:7px">Play. Predict. Win Big.</p></div>
+      <div class="footer-links"><a href="#pool">Prize Pool</a><a href="#pick">Pick Rizoon</a><a href="#how">How It Works</a><a href="#">Terms</a><a href="#">Privacy</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Rizoon. All rights reserved.</span><span>18+ · Play responsibly</span></div>
+  </div>
+</footer>
+
+<a class="fab tg-link" href="#">➤ Join Telegram</a>
+
+
+<!-- Auto Play / Telegram Registration Popup -->
+<div class="play-popup" id="playPopup" aria-hidden="true">
+  <div class="play-popup-card">
+    <button class="popup-close" id="popupClose" aria-label="Close">×</button>
+    <div class="popup-logo-wrap">
+      <img src="./images/logo.png" alt="Rizoon">
+    </div>
+    <div class="popup-badge">🏆 LIVE POOL TONIGHT</div>
+    <h3>Play the Rizoon Pool Now!</h3>
+    <p>Join on Telegram and get today's prize pool details, draw updates and registration instructions.</p>
+
+    <div class="popup-prize">
+      <span>TODAY'S POOL PRIZE</span>
+      <strong>$110,000</strong>
+      <small>Big pool · Bigger dreams</small>
+    </div>
+
+    <div class="popup-points">
+      <span>✓ Daily Draws</span>
+      <span>✓ Real Results</span>
+      <span>✓ 18+ Only</span>
+    </div>
+
+    <a class="btn btn-blue popup-telegram" href="https://t.me/YOUR_CHANNEL" target="_blank" rel="noopener">
+      <span class="telegram-icon">➤</span> Join on Telegram
+    </a>
+
+    <button class="popup-later" id="popupLater">Maybe later</button>
+  </div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <button class="close" id="closeModal">×</button>
+    <h3>Register your Rizoon</h3>
+    <p>Your selected Rizoon will be carried into the Telegram registration flow.</p>
+    <div class="modal-actions">
+      <a class="btn btn-blue tg-link" href="#">➤ Continue on Telegram</a>
+      <a class="btn btn-outline" href="#pick" id="modalPick">Change my Rizoon</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const CONFIG = {
+  telegramUrl: 'https://t.me/YOUR_CHANNEL',
+  telegramBot: '',
+  totalPrize: 110000
+};
+
+const GAMES = {
+  q3:{name:'Quick 3',pick:3,max:18,entry:2.50,prize:10000,draw:'8:00 PM'},
+  p4:{name:'Pick 4',pick:4,max:18,entry:3.50,prize:100000,draw:'9:00 PM'}
+};
+
+const money=n=>'$'+Number(n).toLocaleString('en-US');
+document.getElementById('heroTotal').textContent=money(CONFIG.totalPrize);
+document.getElementById('bigTotal').textContent=money(CONFIG.totalPrize);
+document.getElementById('p4Prize').textContent=money(CONFIG.totalPrize);
+document.getElementById('q3Prize').textContent=money(GAMES.q3.prize);
+document.getElementById('q3Any').textContent='$1,000';
+
+document.querySelectorAll('.tg-link').forEach(a=>{
+  a.href=CONFIG.telegramUrl;
+  a.target='_blank';
+  a.rel='noopener';
+});
+
+let game='q3',selected=[];
+
+const grid=document.getElementById('numberGrid');
+const balls=document.getElementById('slipBalls');
+
+function render(){
+  const G=GAMES[game];
+  document.getElementById('pickLabel').textContent=`Pick ${G.pick} numbers`;
+  document.getElementById('pickCount').textContent=`${selected.length} / ${G.pick}`;
+  document.getElementById('slipTitle').textContent=`${G.name} · Tonight`;
+  document.getElementById('slipEntry').textContent='$'+G.entry.toFixed(2);
+  document.getElementById('slipPrize').textContent=money(G.prize);
+  document.getElementById('slipDraw').textContent=G.draw;
+
+  grid.innerHTML='';
+  for(let n=0;n<=G.max;n++){
+    const b=document.createElement('button');
+    b.textContent=String(n).padStart(2,'0');
+    if(selected.includes(n)) b.classList.add('selected');
+    if(selected.length>=G.pick&&!selected.includes(n)) b.disabled=true;
+    b.onclick=()=>{
+      if(selected.includes(n)) selected=selected.filter(x=>x!==n);
+      else if(selected.length<G.pick) selected.push(n);
+      render();
+    };
+    grid.appendChild(b);
+  }
+
+  balls.innerHTML='';
+  for(let i=0;i<G.pick;i++){
+    const b=document.createElement('div');
+    b.className='slip-ball'+(selected[i]!==undefined?' filled':'');
+    b.textContent=selected[i]!==undefined?String(selected[i]).padStart(2,'0'):'—';
+    balls.appendChild(b);
+  }
+
+  const play=document.getElementById('playBtn');
+  if(selected.length===G.pick){
+    const code=`${game}_${selected.map(n=>String(n).padStart(2,'0')).join('_')}`;
+    play.href=CONFIG.telegramBot
+      ? `https://t.me/${CONFIG.telegramBot}?start=${code}`
+      : CONFIG.telegramUrl;
+  }else{
+    play.href=CONFIG.telegramUrl;
+  }
+}
+
+document.querySelectorAll('.tabs button').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active');
+    game=btn.dataset.game;
+    selected=[];
+    render();
+  };
+});
+
+document.getElementById('randomBtn').onclick=()=>{
+  const G=GAMES[game],s=new Set();
+  while(s.size<G.pick)s.add(Math.floor(Math.random()*(G.max+1)));
+  selected=[...s];render();
+};
+document.getElementById('clearBtn').onclick=()=>{selected=[];render()};
+
+function countdown(){
+  const now=new Date();
+  const target=new Date();
+  target.setHours(20,0,0,0);
+  if(now>=target)target.setDate(target.getDate()+1);
+  let s=Math.max(0,Math.floor((target-now)/1000));
+  const vals=[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60];
+  document.querySelectorAll('#clock .timebox b').forEach((x,i)=>x.textContent=String(vals[i]).padStart(2,'0'));
+  document.getElementById('nextName').textContent=now.getHours()<20?'Quick 3':'Next draw';
+}
+countdown();setInterval(countdown,1000);render();
+
+const modal=document.getElementById('modal');
+document.querySelectorAll('.tg-link').forEach(a=>{
+  a.addEventListener('click',()=>{
+    // Direct Telegram navigation remains the default; modal is only available
+    // for sites that later choose to intercept registration.
+  });
+});
+document.getElementById('closeModal').onclick=()=>modal.classList.remove('open');
+document.getElementById('modalPick').onclick=()=>modal.classList.remove('open');
+
+// Telegram registration configuration.
+// Replace YOUR_CHANNEL with your real Telegram username/channel.
+const TELEGRAM_JOIN_LINK = 'https://t.me/YOUR_CHANNEL';
+
+document.querySelectorAll('.tg-link').forEach(a => {
+  a.href = TELEGRAM_JOIN_LINK;
+  a.target = '_blank';
+  a.rel = 'noopener';
+});
+document.querySelectorAll('.popup-telegram').forEach(a => a.href = TELEGRAM_JOIN_LINK);
+
+const playPopup = document.getElementById('playPopup');
+const popupClose = document.getElementById('popupClose');
+const popupLater = document.getElementById('popupLater');
+
+function openPlayPopup(){
+  playPopup.classList.add('show');
+  playPopup.setAttribute('aria-hidden','false');
+}
+function closePlayPopup(){
+  playPopup.classList.remove('show');
+  playPopup.setAttribute('aria-hidden','true');
+  sessionStorage.setItem('Rizoon_popup_closed','1');
+}
+popupClose.addEventListener('click', closePlayPopup);
+popupLater.addEventListener('click', closePlayPopup);
+playPopup.addEventListener('click', e => {
+  if(e.target === playPopup) closePlayPopup();
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closePlayPopup();
+});
+
+// Show the play/register popup once per browser session after a short delay.
+if(!sessionStorage.getItem('Rizoon_popup_closed')){
+  setTimeout(openPlayPopup, 1800);
+}
+
+</script>
+</body>
+</html>
